@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use \DB;
 use Illuminate\Support\Facades\Hash;
 class UtilizadorController extends Controller
 {
@@ -31,8 +32,8 @@ class UtilizadorController extends Controller
          $suario=[
              'name' => $data['name'],
              'email' =>   $data['email'],
-             '' => Hash::make($data['password']),
-           password
+             'password' => Hash::make($data['password']),
+           
      
          ];
  
@@ -48,5 +49,25 @@ class UtilizadorController extends Controller
      }
  
         
+     }
+
+     public function pesquisar(Request $request){
+        $nome=$request['nome']."%";
+        $Nomes="%".$nome;
+        $users=\App\User::where('name','like',$Nomes)
+        ->orderBy('created_at','DESC')->get();
+        return response()->json($users,200);
+     }
+
+
+     public function id(Request $request){
+        $email=$request['email'];
+        
+        $id = DB::table('users')
+   
+        ->where('users.email', $email)  
+        ->select('users.id')
+        ->get();
+        return response()->json($id,200);
      }
 }

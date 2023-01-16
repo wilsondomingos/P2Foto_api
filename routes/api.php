@@ -34,6 +34,8 @@ Route::prefix('v1')->namespace('Api')->group(function(){
 Route::prefix('v1')->namespace('Api')->group(function(){
     Route::prefix('user')->name('user.')->group(function(){
         Route::resource('/','UtilizadorController');
+        Route::post('/pesquisar','UtilizadorController@pesquisar');
+        Route::post('/id','UtilizadorController@id');
     });
 });
 
