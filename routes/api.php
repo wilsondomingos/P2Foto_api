@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->namespace('Api')->group(function(){
     Route::prefix('albums')->name('album.')->group(function(){
         Route::resource('/','AlbumController');
+        Route::post('/StoreAlbum','AlbumController@StoreAlbum');
+ 
     });
 });
 
@@ -28,6 +30,8 @@ Route::prefix('v1')->namespace('Api')->group(function(){
 Route::prefix('v1')->namespace('Api')->group(function(){
     Route::prefix('fotos')->name('foto.')->group(function(){
         Route::resource('/','FotoController');
+        Route::post('/Storefoto','FotoController@Storefoto');
+        
     });
 });
 

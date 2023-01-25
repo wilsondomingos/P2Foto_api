@@ -49,4 +49,16 @@ class AlbumController extends Controller
     }
 
 
+    public function StoreAlbum(Request $request){
+        $user_id = $request['user_id'];
+        $album = DB::table('albums')
+        ->where('albums.user_id', $user_id)  
+        ->select('albums.*')
+        ->get();
+
+        return response()->json($album,200);
+    }
+
+
+
 }

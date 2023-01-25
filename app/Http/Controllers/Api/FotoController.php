@@ -59,4 +59,13 @@ class FotoController extends Controller
         return view('Listar_foto',compact('fotos'));
     }
 
+    public function Storefoto(Request $request){
+        $album_id = $request['album_id'];
+        $fotos = DB::table('fotos')
+        ->where('fotos.album_id',$album_id)  
+        ->select('fotos.*')
+        ->get();
+        return response()->json($fotos,200);
+    }
+
 }
